@@ -7,7 +7,6 @@ using namespace std;
 vector<int> solution(int m, int n, vector<vector<int>> picture) {
     int dx[4]={1,-1,0,0};
     int dy[4]={0,0,1,-1};
-    vector<vector<int>> p;
     bool visit[100][100]={false};
     queue<pair<int,int>> q;
     int area_n=0;
@@ -15,9 +14,6 @@ vector<int> solution(int m, int n, vector<vector<int>> picture) {
     
     int number_of_area = 0;
     int max_size_of_one_area = 0;
-
-    p.resize(m,vector<int>(n));
-    copy(picture.begin(), picture.end(),p.begin());
     
     for(int i=0;i<m;i++){
         for(int j=0;j<n;j++){
@@ -38,7 +34,7 @@ vector<int> solution(int m, int n, vector<vector<int>> picture) {
                         if(nx<0||ny<0||nx>=n||ny>=m)
                             continue;
 
-                        if(!visit[ny][nx]&&p[ny][nx]==p[y][x]){
+                        if(!visit[ny][nx]&&picture[ny][nx]==picture[y][x]){
                             q.push(make_pair(nx,ny));
                             visit[ny][nx]=true;
                             cnt++;
