@@ -1,0 +1,26 @@
+#include <algorithm>
+#include <unordered_map>
+
+class Solution {
+    
+    bool static cmp(string s1, string s2){
+        return s1.length()<s2.length();
+    }
+
+public:
+    int longestStrChain(vector<string>& words) {
+        sort(words.begin(), words.end(),cmp);
+        
+        int maxl=0;
+        unordered_map<string, int> dp;
+        
+        for(string word:words){
+            for(int i=0;i<word.size();i++){
+                dp[word]=max(dp[word],dp[word.substr(0,i)+word.substr(i+1)]+1);
+            }
+            maxl=max(maxl,dp[word]);
+        }
+        
+        return maxl;
+    }
+};
